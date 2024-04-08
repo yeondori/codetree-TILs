@@ -40,7 +40,7 @@ public class Main {
         }
 
         // 점수 계산
-        int score = calculateScore();
+        long score = calculateScore();
         System.out.println(score);
     }
 
@@ -92,8 +92,8 @@ public class Main {
         return new int[]{row, col};
     }
 
-    static int calculateScore() {
-        int score = 0;
+    static long calculateScore() {
+        long score = 0;
         for(int i = 0; i < boardSize; i++) {
             for(int j =0; j < boardSize; j++) {
                 int me = board[i][j];
