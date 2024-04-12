@@ -19,6 +19,17 @@ public class Main {
         }
 
         @Override
+        public int hashCode() {
+            return Objects.hash(x, y);
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            Point o = (Point) obj;
+            return this.x == o.x && this.y == o.y;
+        }
+
+        @Override
         public String toString() {
             final StringBuilder sb = new StringBuilder("Point{");
             sb.append("x=").append(x);
@@ -102,6 +113,7 @@ public class Main {
 
     private static void hideAndSeek() {
         for (int turn = 1; turn <= endTurn; turn++) {
+
             // 1. 도망자 이동
             moveHiders();
             // 2. 술래 이동
@@ -158,7 +170,6 @@ public class Main {
     private static void moveHiders() {
         List<Point> nextMoves = new ArrayList<>();
         for (Point curHider : hiders) {
-
             // 술래와의 거리가 3 이하인 도망자들은 이동할 수 있다.
             if (getDistance(curHider, seeker) <= SIGHT) {
                 int nx = curHider.x + dx[curHider.dir];
@@ -169,7 +180,6 @@ public class Main {
                         curHider.x = nx;
                         curHider.y = ny;
                     }
-
                 }  else {   // 격자를 벗어나면 방향을 바꾸고 한칸 더 이동가능한지 확인
                     curHider.dir = (curHider.dir + 2) % 4;
                     nx = curHider.x + dx[curHider.dir];
@@ -181,6 +191,7 @@ public class Main {
                     }
                 }
             }
+
             nextMoves.add(curHider);
         }
         hiders = nextMoves;
